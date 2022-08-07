@@ -5,13 +5,13 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0879222A-1B3D-4D6A-87BD-4D676107195F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.Domain", "src\Blogger.Domain\Blogger.Domain.csproj", "{C3791D0A-D0BC-4017-8C38-70C844D516E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.Domain", "Blogger.Domain\Blogger.Domain.csproj", "{C3791D0A-D0BC-4017-8C38-70C844D516E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.Application", "src\Blogger.Application\Blogger.Application.csproj", "{85382840-B4FF-423F-9333-A55B37351827}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.Application", "Blogger.Application\Blogger.Application.csproj", "{85382840-B4FF-423F-9333-A55B37351827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.Infrastructure", "src\Blogger.Infrastructure\Blogger.Infrastructure.csproj", "{700042BC-7FE0-4B15-BC25-F273A3381883}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.Infrastructure", "Blogger.Infrastructure\Blogger.Infrastructure.csproj", "{700042BC-7FE0-4B15-BC25-F273A3381883}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.API", "src\Blogger.API\Blogger.API.csproj", "{56D6220F-AE41-4DA5-8205-921DC95AD535}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.API", "Blogger.API\Blogger.API.csproj", "{56D6220F-AE41-4DA5-8205-921DC95AD535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
