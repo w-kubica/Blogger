@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blogger.Application.Dto;
 using Blogger.Application.Interfaces;
+using Blogger.Domain.Entities;
 using Blogger.Domain.Interfaces;
 
 namespace Blogger.Application.Services
@@ -26,6 +27,19 @@ namespace Blogger.Application.Services
         {
             var post = _postRepository.GetById(id);
             return _mapper.Map<PostDto>(post);
+        }
+
+        public PostDto AddPost(CreatePostDto post)
+        {
+            if (string.IsNullOrEmpty(post.Title))
+            {
+                throw new Exception("Post cannot have an empty title.");
+            }
+
+            var newPost = _mapper.Map<Post>(post);
+            _postRepository.Add(newPost);
+
+            return _mapper.Map<PostDto>(newPost); 
         }
     }
 }

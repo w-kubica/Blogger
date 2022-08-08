@@ -1,4 +1,5 @@
-﻿using Blogger.Application.Interfaces;
+﻿using Blogger.Application.Dto;
+using Blogger.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -6,10 +7,10 @@ namespace Blogger.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly IPostService _postService;
-        public PostController(IPostService postService)
+        public PostsController(IPostService postService)
         {
             _postService = postService;
         }
@@ -32,6 +33,15 @@ namespace Blogger.API.Controllers
                 return NotFound();
             }
             return Ok(post);
+        }
+
+        [SwaggerOperation(Summary = "Create a new post.")]
+        [HttpPost]
+        public IActionResult Create(CreatePostDto newPost)
+        {
+            var post = _postService.AddPost(newPost);
+
+            return Created($"api/posts/{post.Id}", post); 
         }
     }
 }

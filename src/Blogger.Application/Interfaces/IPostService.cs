@@ -6,5 +6,8 @@ namespace Blogger.Application.Interfaces
     {
         IEnumerable<PostDto> GetAllPosts();
         PostDto GetPostById(int id);
+
+        PostDto AddPost(CreatePostDto post);
+
     }
 }
