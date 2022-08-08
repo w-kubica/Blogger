@@ -9,5 +9,8 @@ namespace Blogger.Application.Interfaces
 
         PostDto AddPost(CreatePostDto post);
 
+        void UpdatePost(UpdatePostDto updatePost); 
+
+        void DeletePost(int id);
     }
 }

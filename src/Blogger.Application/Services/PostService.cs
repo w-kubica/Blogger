@@ -41,5 +41,21 @@ namespace Blogger.Application.Services
 
             return _mapper.Map<PostDto>(newPost); 
         }
+
+        public void UpdatePost(UpdatePostDto updatePost)
+        {
+            var existingPost = _postRepository.GetById(updatePost.Id);
+
+            var post = _mapper.Map(updatePost, existingPost);
+
+            _postRepository.Update(post);
+        }
+
+        public void DeletePost(int id)
+        {
+            var post = _postRepository.GetById(id);
+            
+            _postRepository.Delete(post);
+        }
     }
 }
