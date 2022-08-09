@@ -1,10 +1,7 @@
 ﻿using Blogger.Application;
-using Blogger.Application.Interfaces;
-using Blogger.Application.Mappings;
-using Blogger.Application.Services;
-using Blogger.Domain.Interfaces;
 using Blogger.Infrastructure;
-using Blogger.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace Blogger.API.Installers
 {
@@ -16,6 +13,14 @@ namespace Blogger.API.Installers
             services.AddInfrastructure();
 
             services.AddControllers();
+
+            services.AddApiVersioning(x =>
+            {
+                x.DefaultApiVersion = new ApiVersion(1, 0);
+                x.AssumeDefaultVersionWhenUnspecified = true;
+                x.ReportApiVersions = true;
+                x.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
+            });
 
         }
     }

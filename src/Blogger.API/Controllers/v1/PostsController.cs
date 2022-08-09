@@ -4,8 +4,9 @@ using Blogger.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Blogger.API.Controllers
+namespace Blogger.API.Controllers.v1
 {
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
@@ -42,7 +43,7 @@ namespace Blogger.API.Controllers
         {
             var post = _postService.AddPost(newPost);
 
-            return Created($"api/posts/{post.Id}", post); 
+            return Created($"api/posts/{post.Id}", post);
         }
 
         [SwaggerOperation(Summary = "Update a existing post.")]
@@ -50,15 +51,15 @@ namespace Blogger.API.Controllers
         public IActionResult Update(UpdatePostDto updatePost)
         {
             _postService.UpdatePost(updatePost);
-            return NoContent(); 
+            return NoContent();
         }
 
         [SwaggerOperation(Summary = "Delete a specific post.")]
-        [HttpDelete ("{id}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _postService.DeletePost(id);
-            return NoContent(); 
+            return NoContent();
         }
     }
 }
