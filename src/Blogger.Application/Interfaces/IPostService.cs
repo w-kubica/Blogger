@@ -4,13 +4,13 @@ namespace Blogger.Application.Interfaces
 {
     public interface IPostService
     {
-        IEnumerable<PostDto> GetAllPosts();
-        PostDto GetPostById(int id);
+        Task<IEnumerable<PostDto>> GetAllPostsAsync();
+        Task <PostDto> GetPostByIdAsync(int id);
 
-        PostDto AddPost(CreatePostDto post);
+        Task <PostDto> AddPostAsync(CreatePostDto post);
 
-        void UpdatePost(UpdatePostDto updatePost); 
+        Task UpdatePostAsync(UpdatePostDto updatePost);
 
-        void DeletePost(int id);
+        Task DeletePostAsync(int id);
     }
 }

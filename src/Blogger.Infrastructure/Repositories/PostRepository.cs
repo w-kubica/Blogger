@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Blogger.Domain.Entities;
 using Blogger.Domain.Interfaces;
 using Blogger.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blogger.Infrastructure.Repositories
 {
@@ -17,37 +18,37 @@ namespace Blogger.Infrastructure.Repositories
         {
             _context = context;
         }
-        public IEnumerable<Post> GetAll()
+        public async Task<IEnumerable<Post>> GetAllAsync()
         {
-            return _context.Posts;
+            return await _context.Posts.ToListAsync();
         }
 
-        public Post GetById(int id)
+        public async Task<Post> GetByIdAsync(int id)
         {
             var posts = _context.Posts;
-            return _context.Posts.SingleOrDefault(x => x.Id == id);
+            return await _context.Posts.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public Post Add(Post post)
+        public async Task<Post> AddAsync(Post post)
         {
-            post.Created = DateTime.UtcNow;
+            var createdPost = await _context.Posts.AddAsync(post);
             _context.Posts.Add(post);
-            _context.SaveChanges();
-            return post;
-
+            _context.SaveChangesAsync();
+            return createdPost.Entity;
         }
 
-        public void Update(Post post)
+        public async Task UpdateAsync(Post post)
         {
-            post.LastModified = DateTime.UtcNow;
             _context.Posts.Update(post);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
+            await Task.CompletedTask;
         }
 
-        public void Delete(Post post)
+        public async Task DeleteAsync(Post post)
         {
             _context.Posts.Remove(post);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
+            await Task.CompletedTask;
         }
     }
 }

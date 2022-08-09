@@ -19,9 +19,9 @@ namespace Blogger.API.Controllers.v2
 
         [SwaggerOperation(Summary = "Retrieves all posts")]
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var posts = _postService.GetAllPosts();
+            var posts = await _postService.GetAllPostsAsync();
             return Ok(
                 new
                 {
@@ -32,9 +32,9 @@ namespace Blogger.API.Controllers.v2
 
         [SwaggerOperation(Summary = "Retrieves a specific post by unique id")]
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            var post = _postService.GetPostById(id);
+            var post = await _postService.GetPostByIdAsync(id);
             if (post == null)
             {
                 return NotFound();
@@ -44,26 +44,26 @@ namespace Blogger.API.Controllers.v2
 
         [SwaggerOperation(Summary = "Create a new post.")]
         [HttpPost]
-        public IActionResult Create(CreatePostDto newPost)
+        public async Task<ActionResult> Create(CreatePostDto newPost)
         {
-            var post = _postService.AddPost(newPost);
+            var post = await _postService.AddPostAsync(newPost);
 
             return Created($"api/posts/{post.Id}", post);
         }
 
         [SwaggerOperation(Summary = "Update a existing post.")]
         [HttpPut]
-        public IActionResult Update(UpdatePostDto updatePost)
+        public async Task<ActionResult> Update(UpdatePostDto updatePost)
         {
-            _postService.UpdatePost(updatePost);
+           await _postService.UpdatePostAsync(updatePost);
             return NoContent();
         }
 
         [SwaggerOperation(Summary = "Delete a specific post.")]
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _postService.DeletePost(id);
+           await _postService.DeletePostAsync(id);
             return NoContent();
         }
     }

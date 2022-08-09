@@ -3,6 +3,7 @@ using Blogger.Application.Dto;
 using Blogger.Application.Interfaces;
 using Blogger.Domain.Entities;
 using Blogger.Domain.Interfaces;
+using Microsoft.VisualBasic;
 
 namespace Blogger.Application.Services
 {
@@ -17,45 +18,45 @@ namespace Blogger.Application.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<PostDto> GetAllPosts()
+        public async Task<IEnumerable<PostDto>> GetAllPostsAsync()
         {
-            var _posts = _postRepository.GetAll();
-            return _mapper.Map<IEnumerable<PostDto>>(_posts); 
+            var _posts = await _postRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<PostDto>>(_posts);
         }
 
-        public PostDto GetPostById(int id)
+        public async Task<PostDto> GetPostByIdAsync(int id)
         {
-            var post = _postRepository.GetById(id);
+            var post = await _postRepository.GetByIdAsync(id);
             return _mapper.Map<PostDto>(post);
         }
 
-        public PostDto AddPost(CreatePostDto post)
+        public async Task<PostDto> AddPostAsync(CreatePostDto newPost)
         {
-            if (string.IsNullOrEmpty(post.Title))
+            if (string.IsNullOrEmpty(newPost.Title))
             {
                 throw new Exception("Post cannot have an empty title.");
             }
 
-            var newPost = _mapper.Map<Post>(post);
-            _postRepository.Add(newPost);
-
-            return _mapper.Map<PostDto>(newPost); 
+            var post = _mapper.Map<Post>(newPost);
+            var result = await _postRepository.AddAsync(post);
+            return _mapper.Map<PostDto>(result);
         }
 
-        public void UpdatePost(UpdatePostDto updatePost)
+        public async Task UpdatePostAsync(UpdatePostDto updatePost)
         {
-            var existingPost = _postRepository.GetById(updatePost.Id);
+            var existingPost = await _postRepository.GetByIdAsync(updatePost.Id);
 
             var post = _mapper.Map(updatePost, existingPost);
 
-            _postRepository.Update(post);
+            await _postRepository.UpdateAsync(post);
         }
 
-        public void DeletePost(int id)
+        public async Task DeletePostAsync(int id)
         {
-            var post = _postRepository.GetById(id);
-            
-            _postRepository.Delete(post);
+            var post = await _postRepository.GetByIdAsync(id);
+
+            await _postRepository.DeleteAsync(post);
+
         }
     }
 }
