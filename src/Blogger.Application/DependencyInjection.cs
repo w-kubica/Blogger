@@ -1,8 +1,7 @@
-﻿using System.Reflection;
-using Blogger.Application.Interfaces;
-using Blogger.Application.Mappings;
+﻿using Blogger.Application.Interfaces;
 using Blogger.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Blogger.Application
 {
@@ -16,5 +15,5 @@ namespace Blogger.Application
 
             return services;
         }
-    }
+     }
 }
