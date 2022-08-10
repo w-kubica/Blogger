@@ -1,9 +1,4 @@
 using Blogger.API.Installers;
-using Blogger.Application.Interfaces;
-using Blogger.Application.Mappings;
-using Blogger.Application.Services;
-using Blogger.Domain.Interfaces;
-using Blogger.Infrastructure.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);

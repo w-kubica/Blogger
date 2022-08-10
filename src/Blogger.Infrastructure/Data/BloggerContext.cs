@@ -11,7 +11,7 @@ namespace Blogger.Infrastructure.Data
 
         }
 
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Post>? Posts { get; set; }
 
         public async Task <int> SaveChangesAsync()
         {

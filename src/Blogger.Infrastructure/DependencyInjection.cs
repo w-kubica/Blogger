@@ -9,6 +9,7 @@ namespace Blogger.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<IPostRepository, PostRepository>();
+            services.AddScoped<ICosmosPostRepository, CosmosPostRepository>();
 
             return services;
         }

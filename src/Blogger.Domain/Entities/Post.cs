@@ -12,11 +12,11 @@ namespace Blogger.Domain.Entities
 
         [Required]
         [MaxLength(100)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Required]
         [MaxLength(2000)]
-        public string Content { get; set; }
+        public string? Content { get; set; }
 
         public Post() { }
 

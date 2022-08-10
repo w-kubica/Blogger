@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
 using Blogger.Application.Mappings;
-using Blogger.Domain.Entities;
+using Blogger.Domain.Cosmos;
 
 namespace Blogger.Application.Dto
 {
-    public class PostDto : IMap
+    public class CreateCosmosPostDto : IMap
     {
-        public int Id { get; set; }
         public string? Title { get; set; }
         public string? Content { get; set; }
+
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Post, PostDto>();
+            profile.CreateMap<CreateCosmosPostDto, CosmosPost>();
         }
     }
 }

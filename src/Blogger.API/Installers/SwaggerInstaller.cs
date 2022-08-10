@@ -2,7 +2,7 @@
 {
     public class SwaggerInstaller : IInstaller
     {
-        public void InstallServices(IServiceCollection services, IConfiguration Configuration
+        public void InstallServices(IServiceCollection services, IConfiguration configuration
         )
         {
             services.AddEndpointsApiExplorer();

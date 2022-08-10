@@ -5,14 +5,13 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Blogger.API.Controllers.v2
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiVersion("2.0")]
     [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly IPostService _postService;
-        public PostsController(IPostService postService)
+        private readonly ICosmosPostService _postService;
+        public PostsController(ICosmosPostService postService)
         {
             _postService = postService;
         }
@@ -22,17 +21,12 @@ namespace Blogger.API.Controllers.v2
         public async Task<ActionResult> Get()
         {
             var posts = await _postService.GetAllPostsAsync();
-            return Ok(
-                new
-                {
-                    Posts = posts,
-                    Count = posts.Count()
-                });
+            return Ok(posts);
         }
 
         [SwaggerOperation(Summary = "Retrieves a specific post by unique id")]
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult> Get(string id)
         {
             var post = await _postService.GetPostByIdAsync(id);
             if (post == null)
@@ -44,7 +38,7 @@ namespace Blogger.API.Controllers.v2
 
         [SwaggerOperation(Summary = "Create a new post.")]
         [HttpPost]
-        public async Task<ActionResult> Create(CreatePostDto newPost)
+        public async Task<ActionResult> Create(CreateCosmosPostDto newPost)
         {
             var post = await _postService.AddPostAsync(newPost);
 
@@ -53,7 +47,7 @@ namespace Blogger.API.Controllers.v2
 
         [SwaggerOperation(Summary = "Update a existing post.")]
         [HttpPut]
-        public async Task<ActionResult> Update(UpdatePostDto updatePost)
+        public async Task<ActionResult> Update(UpdateCosmosPostDto updatePost)
         {
            await _postService.UpdatePostAsync(updatePost);
             return NoContent();
@@ -61,7 +55,7 @@ namespace Blogger.API.Controllers.v2
 
         [SwaggerOperation(Summary = "Delete a specific post.")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
            await _postService.DeletePostAsync(id);
             return NoContent();

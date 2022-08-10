@@ -7,7 +7,7 @@ namespace Blogger.API.Installers
 {
     public class MvcInstaller : IInstaller
     {
-        public void InstallServices(IServiceCollection services, IConfiguration Configuration)
+        public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddApplication();
             services.AddInfrastructure();
@@ -16,7 +16,7 @@ namespace Blogger.API.Installers
 
             services.AddApiVersioning(x =>
             {
-                x.DefaultApiVersion = new ApiVersion(1, 0);
+                x.DefaultApiVersion = new ApiVersion(2, 0);
                 x.AssumeDefaultVersionWhenUnspecified = true;
                 x.ReportApiVersions = true;
                 x.ApiVersionReader = new HeaderApiVersionReader("x-api-version");

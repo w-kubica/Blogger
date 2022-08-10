@@ -12,7 +12,7 @@ namespace Blogger.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddTransient<IPostService, PostService>();
-
+            services.AddScoped<ICosmosPostService, CosmosPostService>();
             return services;
         }
      }
