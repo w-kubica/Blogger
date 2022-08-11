@@ -4,9 +4,9 @@ namespace Blogger.Application.Interfaces
 {
     public interface IPostService
     {
-        Task<IEnumerable<PostDto>> GetAllPostsAsync(int pageNumber, int pageSize, string sortField, bool ascending);
+        Task<IEnumerable<PostDto>> GetAllPostsAsync(int pageNumber, int pageSize, string sortField, bool ascending, string filterBy);
 
-        Task<int> GetAllCountAsync();
+        Task<int> GetAllCountAsync(string filterBy);
 
         Task <PostDto> GetPostByIdAsync(int id);
 

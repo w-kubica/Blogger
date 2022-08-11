@@ -29,14 +29,14 @@ namespace Blogger.API.Controllers.v1
 
         [SwaggerOperation(Summary = "Retrieves all posts")]
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SortingFilter sortingFilter)
+        public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SortingFilter sortingFilter, [FromQuery] string filterBy="")
         {
             var validPaginationFilter = new PaginationFilter(paginationFilter.PageNumber, paginationFilter.PageSize);
 
             var validationSortingFiler = new SortingFilter(sortingFilter.SortField, sortingFilter.Ascending); 
 
-            var posts = await _postService.GetAllPostsAsync(validPaginationFilter.PageNumber, validPaginationFilter.PageSize, validationSortingFiler.SortField,validationSortingFiler.Ascending);
-            var totalRecords = await _postService.GetAllCountAsync();
+            var posts = await _postService.GetAllPostsAsync(validPaginationFilter.PageNumber, validPaginationFilter.PageSize, validationSortingFiler.SortField,validationSortingFiler.Ascending, filterBy);
+            var totalRecords = await _postService.GetAllCountAsync(filterBy);
 
             return Ok(PaginationHelper.CreatePagedResponse(posts, validPaginationFilter, totalRecords));
         }
