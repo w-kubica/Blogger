@@ -18,14 +18,24 @@ namespace Blogger.API.Controllers.v1
         {
             _postService = postService;
         }
+        
+        [SwaggerOperation(Summary = "Retrieves sort fields")]
+        [HttpGet("[action]")]
+        public IActionResult Get()
+        {
+            return Ok(SortingHelper.GetSortFilds().Select(x => x.Key));
+        }
+
 
         [SwaggerOperation(Summary = "Retrieves all posts")]
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter)
+        public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SortingFilter sortingFilter)
         {
             var validPaginationFilter = new PaginationFilter(paginationFilter.PageNumber, paginationFilter.PageSize);
 
-            var posts = await _postService.GetAllPostsAsync(validPaginationFilter.PageNumber, validPaginationFilter.PageSize);
+            var validationSortingFiler = new SortingFilter(sortingFilter.SortField, sortingFilter.Ascending); 
+
+            var posts = await _postService.GetAllPostsAsync(validPaginationFilter.PageNumber, validPaginationFilter.PageSize, validationSortingFiler.SortField,validationSortingFiler.Ascending);
             var totalRecords = await _postService.GetAllCountAsync();
 
             return Ok(PaginationHelper.CreatePagedResponse(posts, validPaginationFilter, totalRecords));
