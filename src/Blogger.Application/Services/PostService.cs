@@ -17,10 +17,15 @@ namespace Blogger.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<PostDto>> GetAllPostsAsync()
+        public async Task<IEnumerable<PostDto>> GetAllPostsAsync(int pageNumber, int pageSize)
         {
-            var posts = await _postRepository.GetAllAsync();
+            var posts = await _postRepository.GetAllAsync( pageNumber,  pageSize);
             return _mapper.Map<IEnumerable<PostDto>>(posts);
+        }
+
+        public async Task<int> GetAllCountAsync()
+        {
+            return await _postRepository.GetAllCountAsync();
         }
 
         public async Task<PostDto> GetPostByIdAsync(int id)

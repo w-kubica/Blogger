@@ -5,6 +5,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Blogger.API.Controllers.v2
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiVersion("2.0")]
     [Route("api/[controller]")]
     [ApiController]
