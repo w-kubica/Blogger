@@ -5,10 +5,11 @@ Kod źródłowy powstały podczas kursu ASP.NET autorstwa Patryka Sładka. </br>
 
 ## Zawartość kursu 
 Kurs obejmuje:
-- Podstawy interfejsu API,
-- Przetwarzanie danych,
-- Uwierzytelnianie i autoryzacja, 
-- Rozszerzenie interfejsu API, 
-- Logowanie i cachowanie danych,
-- Testowanie i monitorowanie,
-- Hostowanie i publikowanie. 
+- Zagadnienia teoretyczne (API, protokół HTTP, JSON, REST),
+- Podstawy interfejsu API (*onion architecture*, metody HTTP, *dependency injection*, AutoMapper),
+- Przetwarzanie danych (Entity Framework,  Azure Cosmos DB),
+- Uwierzytelnianie i autoryzacja (JWT),
+- Rozszerzenie interfejsu API (Middleware, FluentValidation, Swagger, Refit, Health Check),
+- Logowanie i cachowanie danych (NLog, Serilog, Redis),
+- Testowanie i monitorowanie (testy jednostkowe: xUnit, Moq i FluentAssertion, testy integracyjne, App Metrics, Prometeus, Grafana),
+- Hostowanie i publikowanie (CORS, Azure, IIS).
